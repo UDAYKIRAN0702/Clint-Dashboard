@@ -1,0 +1,109 @@
+.crm-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: auto;
+}
+
+.crm-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.search-input {
+  padding: 8px;
+  width: 250px;
+  font-size: 14px;
+}
+
+.add-client-button {
+  padding: 8px 14px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.client-table {
+  width: 120%;
+  border-collapse: collapse;
+}
+
+.client-table th,
+.client-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 5px 10px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 3px;
+  font-size: 13px;
+}
+
+.edit-btn {
+  background-color: #007bff;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  width: 300px;
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-buttons button {
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.modal-buttons button:first-child {
+  background-color: #28a745;
+  color: white;
+}
+
+.modal-buttons button:last-child {
+  background-color: #6c757d;
+  color: white;
+}

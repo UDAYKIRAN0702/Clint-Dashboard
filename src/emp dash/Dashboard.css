@@ -1,0 +1,96 @@
+/* ===== Dashboard.css ===== */
+
+/* General */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+h1, h2 {
+  margin: 0 0 10px 0;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #0066ff; /* dark orange for headings */
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* Grid Layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.grid-item {
+  background-color: #fff3e0;
+  border-left: 6px solid #0091ff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.grid-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.grid-item h1 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #0092e6;
+}
+
+.grid-item p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+/* Activity Section */
+.activity-section {
+  grid-column: 1 / -1;
+  background-color: #e0f7fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.activity-section ul {
+  padding-left: 20px;
+}
+
+.activity-section li {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+/* Announcements */
+.announcements {
+  grid-column: 1 / -1;
+  background-color: #fff3e0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.announcements p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}

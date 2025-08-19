@@ -1,0 +1,53 @@
+.org-tree-wrapper {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.org-tree {
+  margin-top: 10px;
+}
+
+.tree-node {
+  margin-left: 20px;
+}
+
+.node-row {
+  display: flex;
+  align-items: center;
+  margin: 4px 0;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  margin-right: 6px;
+  font-size: 14px;
+}
+
+.spacer {
+  display: inline-block;
+  width: 14px;
+  margin-right: 6px;
+}
+
+.node-icon {
+  margin-right: 6px;
+  color: #007bff;
+}
+
+.node-label {
+  font-size: 14px;
+}
+
+.node-name {
+  color: #555;
+  font-weight: normal;
+}
+
+.children {
+  margin-left: 20px;
+  border-left: 1px dashed #ccc;
+  padding-left: 10px;
+}
