@@ -1,109 +1,190 @@
+/* ===== CRM Container ===== */
 .crm-container {
   padding: 20px;
   font-family: Arial, sans-serif;
-  max-width: 900px;
-  margin: auto;
+  color: #333;
 }
 
+.crm-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  font-size: 26px;
+}
+
+/* ===== Search + Add Button ===== */
 .crm-actions {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
-.search-input {
-  padding: 8px;
-  width: 250px;
+.crm-actions input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   font-size: 14px;
+  margin-right: 10px;
 }
 
-.add-client-button {
-  padding: 8px 14px;
-  background-color: #28a745;
+.crm-add-btn {
+  background: #3498db;
   color: white;
   border: none;
-  font-size: 14px;
+  padding: 10px 16px;
+  border-radius: 6px;
   cursor: pointer;
-  border-radius: 4px;
+  transition: background 0.3s;
 }
 
-.client-table {
-  width: 120%;
+.crm-add-btn:hover {
+  background: #2980b9;
+}
+
+/* ===== Table ===== */
+.crm-table {
+  width: 100%;
   border-collapse: collapse;
+  margin-top: 10px;
 }
 
-.client-table th,
-.client-table td {
+.crm-table th,
+.crm-table td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: left;
+  font-size: 14px;
 }
 
-.edit-btn,
-.delete-btn {
-  padding: 5px 10px;
-  border: none;
+.crm-table th {
+  background: #f4f6f9;
+  color: #2c3e50;
+}
+
+/* Highlight rows based on status */
+.crm-table tr:hover {
+  background: #f9f9f9;
+}
+
+.color {
+  background: #27ae60;
   color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
   cursor: pointer;
-  margin-right: 5px;
-  border-radius: 3px;
   font-size: 13px;
 }
 
-.edit-btn {
-  background-color: #007bff;
+.color:hover {
+  background: #219150;
 }
 
-.delete-btn {
-  background-color: #dc3545;
-}
-
-.modal-overlay {
+/* ===== Modal ===== */
+.crm-modal {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 999;
 }
 
-.modal {
-  background-color: white;
+.crm-modal-content {
+  background: white;
   padding: 20px;
-  width: 300px;
-  border-radius: 6px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-}
-
-.modal input {
+  border-radius: 12px;
+  max-width: 500px;
   width: 100%;
-  padding: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.crm-modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.crm-modal-content label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.crm-modal-content input,
+.crm-modal-content select {
+  width: 100%;
+  padding: 10px;
   margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
-.modal-buttons {
+/* Date & Time Picker */
+.crm-modal-content input[type="datetime-local"] {
+  font-size: 14px;
+  padding: 9px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.crm-modal-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
-.modal-buttons button {
-  padding: 8px 12px;
+.crm-modal-actions button {
+  padding: 8px 14px;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
-  border-radius: 4px;
   font-size: 14px;
 }
 
-.modal-buttons button:first-child {
-  background-color: #28a745;
+.crm-modal-actions button:first-child {
+  background: #27ae60;
   color: white;
 }
 
-.modal-buttons button:last-child {
-  background-color: #6c757d;
+.crm-modal-actions button:first-child:hover {
+  background: #219150;
+}
+
+.crm-modal-actions button:last-child {
+  background: #e74c3c;
   color: white;
+}
+
+.crm-modal-actions button:last-child:hover {
+  background: #c0392b;
+}
+
+/* ===== Details Table inside Modal ===== */
+.crm-details-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.crm-details-table th,
+.crm-details-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.crm-details-table th {
+  background: #f8f8f8;
+  width: 40%;
 }

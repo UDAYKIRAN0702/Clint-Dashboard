@@ -1,216 +1,248 @@
-import React, { useState } from 'react';
-import './Crm.css';
+import React, { useState } from "react";
+import "./Crm.css";
 
-function Crm() {
-  const [clients, setClients] = useState([
+const  Crm= () =>{
+  const [employees, setEmployees] = useState([
     {
-      id: 'C001',
-      name: 'ABC Corp',
-      contact: 'John Doe',
-      email: 'john@abc.com',
-      address: '123 Main Street',
-      status: 'Active',
-      action: 'Initial Call',
+      id: 1,
+      name: "John Doe",
+      client: "ABC Corp",
+      projectValue: "$50,000",
+      software: "BILLING",
+      status: "Open",
+      startDate: "2025-01-01T09:00",
     },
     {
-      id: 'C002',
-      name: 'XYZ Ltd',
-      contact: 'Jane Smith',
-      email: 'jane@xyz.com',
-      address: '456 Elm Street',
-      status: 'Inactive',
-      action: 'Follow-up',
+      id: 2,
+      name: "Jane Smith",
+      client: "XYZ Ltd",
+      projectValue: "$30,000",
+      software: "HMS",
+      status: "Follow-up",
+      startDate: "2025-02-10T11:30",
+    },
+    {
+      id: 3,
+      name: "Michael Johnson",
+      client: "Tech Solutions",
+      projectValue: "$75,000",
+      software: "CRM",
+      status: "Long",
+      startDate: "2025-03-01T15:00",
     },
   ]);
 
-  const [showModal, setShowModal] = useState(false);
-  const [editingClientId, setEditingClientId] = useState(null);
-  const [clientForm, setClientForm] = useState({
-    name: '',
-    contact: '',
-    email: '',
-    address: '',
-    status: '',
-    action: '',
+  const [showForm, setShowForm] = useState(false);
+  const [showDetails, setShowDetails] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [newClient, setNewClient] = useState({
+    name: "",
+    client: "",
+    projectValue: "",
+    software: "Billing",
+    status: "Open",
+    startDate: "",
   });
-  const [searchTerm, setSearchTerm] = useState('');
 
-  // Handle form input changes
-  const handleInputChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setClientForm({ ...clientForm, [name]: value });
+    setNewClient({ ...newClient, [name]: value });
   };
 
-  // Open modal for new client
-  const openAddModal = () => {
-    setClientForm({
-      name: '',
-      contact: '',
-      email: '',
-      address: '',
-      status: '',
-      action: '',
+  const handleAddClient = () => {
+    setEmployees([...employees, { ...newClient, id: employees.length + 1 }]);
+    setNewClient({
+      name: "",
+      client: "",
+      projectValue: "",
+      software: "Billing",
+      status: "Open",
+      startDate: "",
     });
-    setEditingClientId(null);
-    setShowModal(true);
+    setShowForm(false);
   };
 
-  // Open modal to edit existing client
-  const openEditModal = (client) => {
-    setClientForm(client);
-    setEditingClientId(client.id);
-    setShowModal(true);
-  };
-
-  // Save or update client
-  const handleSave = () => {
-    if (editingClientId) {
-      const updatedClients = clients.map((client) =>
-        client.id === editingClientId ? { ...clientForm, id: editingClientId } : client
-      );
-      setClients(updatedClients);
-    } else {
-      const existingIds = clients.map(c => parseInt(c.id.replace('C', '')) || 0);
-      const nextIdNum = existingIds.length ? Math.max(...existingIds) + 1 : 1;
-      const newId = `C${String(nextIdNum).padStart(3, '0')}`;
-
-      const newClient = { id: newId, ...clientForm };
-      setClients([...clients, newClient]);
-    }
-
-    setShowModal(false);
-  };
-
-  // Delete a client
-  const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this client?')) {
-      setClients(clients.filter((client) => client.id !== id));
-    }
-  };
-
-  // Filter clients by keyword
-  const filteredClients = clients.filter((client) =>
-    client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.contact.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.status.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.action.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.id.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredEmployees = employees.filter(
+    (emp) =>
+      emp.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      emp.client.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      emp.software.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <div className="crm-container">
-      <h1>Client Details</h1>
+      <h1 className="crm-title">CRM</h1>
 
       {/* Search + Add Button */}
       <div className="crm-actions">
         <input
           type="text"
-          placeholder="Enter any keyword"
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
+          placeholder="Search by name, client, software..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <button onClick={openAddModal} className="add-client-button">
+        <button className="crm-add-btn" onClick={() => setShowForm(true)}>
           + Add Client
         </button>
       </div>
 
-      {/* Client Table */}
-      <table className="client-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Client Name</th>
-            <th>Contact Person</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>Status</th>
-            <th>Action</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredClients.length > 0 ? (
-            filteredClients.map((client) => (
-              <tr key={client.id}>
-                <td>{client.id}</td>
-                <td>{client.name}</td>
-                <td>{client.contact}</td>
-                <td>{client.email}</td>
-                <td>{client.address}</td>
-                <td>{client.status}</td>
-                <td>{client.action}</td>
-                <td>
-                  <button className="edit-btn" onClick={() => openEditModal(client)}>Edit</button>
-                  <button className="delete-btn" onClick={() => handleDelete(client.id)}>Delete</button>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="8" style={{ textAlign: 'center' }}>No clients found.</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+      {/* Add Client Popup Form */}
+      {showForm && (
+        <div className="crm-modal">
+          <div className="crm-modal-content">
+            <h2>Add Client</h2>
 
-      {/* Modal Form */}
-      {showModal && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <h2>{editingClientId ? 'Edit Client' : 'Add New Client'}</h2>
+            <label>Name</label>
             <input
               type="text"
               name="name"
-              placeholder="Client Name"
-              value={clientForm.name}
-              onChange={handleInputChange}
+              placeholder="Enter Employee Name"
+              value={newClient.name}
+              onChange={handleChange}
             />
+
+            <label>Client Name</label>
             <input
               type="text"
-              name="contact"
-              placeholder="Contact Person"
-              value={clientForm.contact}
-              onChange={handleInputChange}
+              name="client"
+              placeholder="Enter Client Name"
+              value={newClient.client}
+              onChange={handleChange}
             />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={clientForm.email}
-              onChange={handleInputChange}
-            />
+
+            <label>Project Value</label>
             <input
               type="text"
-              name="address"
-              placeholder="Address"
-              value={clientForm.address}
-              onChange={handleInputChange}
+              name="projectValue"
+              placeholder="Enter Project Value"
+              value={newClient.projectValue}
+              onChange={handleChange}
             />
-            <input
-              type="text"
+
+            <label>Software</label>
+            <select
+              name="software"
+              value={newClient.software}
+              onChange={handleChange}
+            >
+              <option>Billing</option>
+              <option>CRM</option>
+              <option>HMS</option>
+              <option>CRN</option>
+              <option>Other</option>
+            </select>
+
+            <label>Status</label>
+            <select
               name="status"
-              placeholder="Status (e.g., Active, Inactive)"
-              value={clientForm.status}
-              onChange={handleInputChange}
-            />
+              value={newClient.status}
+              onChange={handleChange}
+            >
+              <option>Open</option>
+              <option>Follow-up</option>
+              <option>Long</option>
+              <option>Close</option>
+            </select>
+
+            <label>Start Date & Time:</label>
             <input
-              type="text"
-              name="action"
-              placeholder="Action (e.g., Follow-up, Meeting)"
-              value={clientForm.action}
-              onChange={handleInputChange}
+              type="datetime-local"
+              name="startDate"
+              value={newClient.startDate}
+              onChange={handleChange}
             />
-            <div className="modal-buttons">
-              <button onClick={handleSave}>{editingClientId ? 'Update' : 'Add'}</button>
-              <button onClick={() => setShowModal(false)}>Cancel</button>
+
+            <div className="crm-modal-actions">
+              <button onClick={handleAddClient}>Save</button>
+              <button onClick={() => setShowForm(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Employee Table */}
+      <table className="crm-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Employee</th>
+            <th>Client</th>
+            <th>Project Value</th>
+            <th>Software</th>
+            <th>Status</th>
+            <th>Start Date & Time</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredEmployees.map((emp) => (
+            <tr key={emp.id}>
+              <td>{emp.id}</td>
+              <td>{emp.name}</td>
+              <td>{emp.client}</td>
+              <td>{emp.projectValue}</td>
+              <td>{emp.software}</td>
+              <td>{emp.status}</td>
+              <td>{emp.startDate}</td>
+              <td>
+                <button
+                  onClick={() => setShowDetails(emp)}
+                  className="color"
+                >
+                  View
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Details Popup in Table Format */}
+      {showDetails && (
+        <div className="crm-modal">
+          <div className="crm-modal-content">
+            <h2>Employee Details</h2>
+            <table className="crm-details-table">
+              <tbody>
+                <tr>
+                  <th>ID</th>
+                  <td>{showDetails.id}</td>
+                </tr>
+                <tr>
+                  <th>Name</th>
+                  <td>{showDetails.name}</td>
+                </tr>
+                <tr>
+                  <th>Client</th>
+                  <td>{showDetails.client}</td>
+                </tr>
+                <tr>
+                  <th>Project Value</th>
+                  <td>{showDetails.projectValue}</td>
+                </tr>
+                <tr>
+                  <th>Software</th>
+                  <td>{showDetails.software}</td>
+                </tr>
+                <tr>
+                  <th>Status</th>
+                  <td>{showDetails.status}</td>
+                </tr>
+                <tr>
+                  <th>Start Date & Time</th>
+                  <td>{showDetails.startDate}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div className="crm-modal-actions">
+              <button onClick={() => setShowDetails(null)}>Close</button>
             </div>
           </div>
         </div>
       )}
     </div>
   );
-}
+};
 
 export default Crm;
