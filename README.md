@@ -11,4 +11,8 @@ Currently, two official plugins are available:
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
 "# Clint-Dashboard" 
+<<<<<<< HEAD
 "# client_dashboard" 
+=======
+"# Clint-Dashboard" 
+>>>>>>> 4c31997e7e94b4129599f6e15047728357a3d258
