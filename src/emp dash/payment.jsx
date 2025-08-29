@@ -7,11 +7,14 @@ export default function Payments() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Modal state
+  const [showModal, setShowModal] = useState(false);
+  const [editData, setEditData] = useState({});
+
   // Example fetch simulation (replace with API call)
   useEffect(() => {
     try {
       setLoading(true);
-      // Simulate API fetch
       setTimeout(() => {
         setPayments([
           {
@@ -50,6 +53,25 @@ export default function Payments() {
       .includes(search.toLowerCase())
   );
 
+  // Open modal for editing
+  const handleEdit = (payment) => {
+    setEditData(payment);
+    setShowModal(true);
+  };
+
+  // Save changes
+  const handleSave = () => {
+    setPayments(
+      payments.map((p) => (p.id === editData.id ? { ...editData } : p))
+    );
+    setShowModal(false);
+  };
+
+  // Handle form input change
+  const handleChange = (e, field) => {
+    setEditData({ ...editData, [field]: e.target.value });
+  };
+
   return (
     <div className="payments-container">
       <div className="payments-header">
@@ -77,11 +99,12 @@ export default function Payments() {
                 <th>ID</th>
                 <th>Client Name</th>
                 <th>Contact Person</th>
-                <th>Referral Amount</th>
+                <th>Project Amount</th>
                 <th>My Commission</th>
-                <th>My %</th>
+                <th>My Percentage</th>
                 <th>Total Pay</th>
                 <th>Withdraw Payment</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -95,10 +118,95 @@ export default function Payments() {
                   <td>{payment.myPercent}</td>
                   <td>{payment.totalPay}</td>
                   <td>{payment.withdrawPayment}</td>
+                  <td>
+                    <button
+                      className="edit-btn"
+                      onClick={() => handleEdit(payment)}
+                    >
+                      Edit
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {/* Modal Popup */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Edit Payment</h2>
+            <form>
+              <label>
+                Client Name:
+                <input
+                  type="text"
+                  value={editData.clientName}
+                  onChange={(e) => handleChange(e, "clientName")}
+                />
+              </label>
+              <label>
+                Contact Person:
+                <input
+                  type="text"
+                  value={editData.contactPerson}
+                  onChange={(e) => handleChange(e, "contactPerson")}
+                />
+              </label>
+              <label>
+                Project Amount:
+                <input
+                  type="number"
+                  value={editData.referralAmount}
+                  onChange={(e) => handleChange(e, "referralAmount")}
+                />
+              </label>
+              <label>
+                My Commission:
+                <input
+                  type="number"
+                  value={editData.myCommission}
+                  onChange={(e) => handleChange(e, "myCommission")}
+                />
+              </label>
+              <label>
+                My Percentage:
+                <input
+                  type="text"
+                  value={editData.myPercent}
+                  onChange={(e) => handleChange(e, "myPercent")}
+                />
+              </label>
+              <label>
+                Total Pay:
+                <input
+                  type="number"
+                  value={editData.totalPay}
+                  onChange={(e) => handleChange(e, "totalPay")}
+                />
+              </label>
+              <label>
+                Withdraw Payment:
+                <select
+                  value={editData.withdrawPayment}
+                  onChange={(e) => handleChange(e, "withdrawPayment")}
+                >
+                  <option value="Pending">Pending</option>
+                  <option value="Paid">Paid</option>
+                </select>
+              </label>
+            </form>
+            <div className="modal-actions">
+              <button className="save-btn" onClick={handleSave}>
+                Save
+              </button>
+              <button className="cancel-btn" onClick={() => setShowModal(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
