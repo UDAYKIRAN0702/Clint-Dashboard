@@ -17,6 +17,7 @@ export default function Payments() {
     withdraw_payment: "Pending"
   });
 
+<<<<<<< HEAD
   // API base URL - replace with your actual Django API endpoint
   const API_BASE_URL = "http://127.0.0.1:8000/api/adminpayments/";
 
@@ -63,6 +64,17 @@ export default function Payments() {
       
       // Fallback to sample data if API is not available
       if (err.code === "ERR_NETWORK" || err.response?.status === 404) {
+=======
+  // Modal state
+  const [showModal, setShowModal] = useState(false);
+  const [editData, setEditData] = useState({});
+
+  // Example fetch simulation (replace with API call)
+  useEffect(() => {
+    try {
+      setLoading(true);
+      setTimeout(() => {
+>>>>>>> e664ea96b48318dbbe5f0095ea5b2768b52249d2
         setPayments([
           {
             id: 1,
@@ -265,6 +277,25 @@ export default function Payments() {
       .toLowerCase()
       .includes(search.toLowerCase())
   );
+
+  // Open modal for editing
+  const handleEdit = (payment) => {
+    setEditData(payment);
+    setShowModal(true);
+  };
+
+  // Save changes
+  const handleSave = () => {
+    setPayments(
+      payments.map((p) => (p.id === editData.id ? { ...editData } : p))
+    );
+    setShowModal(false);
+  };
+
+  // Handle form input change
+  const handleChange = (e, field) => {
+    setEditData({ ...editData, [field]: e.target.value });
+  };
 
   return (
     <div className="payments-container">
@@ -522,9 +553,13 @@ export default function Payments() {
                 <th>Contact Person</th>
                 <th>Project Amount</th>
                 <th>My Commission</th>
-                <th>My %</th>
+                <th>My Percentage</th>
                 <th>Total Pay</th>
+<<<<<<< HEAD
                 <th>Payment Status</th>
+=======
+                <th>Withdraw Payment</th>
+>>>>>>> e664ea96b48318dbbe5f0095ea5b2768b52249d2
                 <th>Actions</th>
               </tr>
             </thead>
@@ -532,6 +567,7 @@ export default function Payments() {
               {filteredPayments.map((payment) => (
                 <tr key={payment.id}>
                   <td>{payment.id}</td>
+<<<<<<< HEAD
                   <td>{payment.client_name}</td>
                   <td>{payment.Contact_person}</td>
                   <td>${parseFloat(payment.project_amount).toLocaleString()}</td>
@@ -566,11 +602,104 @@ export default function Payments() {
                         🗑️
                       </button>
                     </div>
+=======
+                  <td>{payment.clientName}</td>
+                  <td>{payment.contactPerson}</td>
+                  <td>{payment.referralAmount}</td>
+                  <td>{payment.myCommission}</td>
+                  <td>{payment.myPercent}</td>
+                  <td>{payment.totalPay}</td>
+                  <td>{payment.withdrawPayment}</td>
+                  <td>
+                    <button
+                      className="edit-btn"
+                      onClick={() => handleEdit(payment)}
+                    >
+                      Edit
+                    </button>
+>>>>>>> e664ea96b48318dbbe5f0095ea5b2768b52249d2
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {/* Modal Popup */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Edit Payment</h2>
+            <form>
+              <label>
+                Client Name:
+                <input
+                  type="text"
+                  value={editData.clientName}
+                  onChange={(e) => handleChange(e, "clientName")}
+                />
+              </label>
+              <label>
+                Contact Person:
+                <input
+                  type="text"
+                  value={editData.contactPerson}
+                  onChange={(e) => handleChange(e, "contactPerson")}
+                />
+              </label>
+              <label>
+                Project Amount:
+                <input
+                  type="number"
+                  value={editData.referralAmount}
+                  onChange={(e) => handleChange(e, "referralAmount")}
+                />
+              </label>
+              <label>
+                My Commission:
+                <input
+                  type="number"
+                  value={editData.myCommission}
+                  onChange={(e) => handleChange(e, "myCommission")}
+                />
+              </label>
+              <label>
+                My Percentage:
+                <input
+                  type="text"
+                  value={editData.myPercent}
+                  onChange={(e) => handleChange(e, "myPercent")}
+                />
+              </label>
+              <label>
+                Total Pay:
+                <input
+                  type="number"
+                  value={editData.totalPay}
+                  onChange={(e) => handleChange(e, "totalPay")}
+                />
+              </label>
+              <label>
+                Withdraw Payment:
+                <select
+                  value={editData.withdrawPayment}
+                  onChange={(e) => handleChange(e, "withdrawPayment")}
+                >
+                  <option value="Pending">Pending</option>
+                  <option value="Paid">Paid</option>
+                </select>
+              </label>
+            </form>
+            <div className="modal-actions">
+              <button className="save-btn" onClick={handleSave}>
+                Save
+              </button>
+              <button className="cancel-btn" onClick={() => setShowModal(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

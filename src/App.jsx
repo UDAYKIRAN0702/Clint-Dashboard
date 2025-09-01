@@ -14,6 +14,7 @@ import Business from "./emp dash/Business ";
 import Payments from "./emp dash/payment";
 import TicketRaise from "./emp dash/Ticket Raise";
 import Dashboard from "./emp dash/Dashboard";
+import Fieldwork from "./emp dash/Fieldwork";
 
 
 export default function App() {
@@ -35,6 +36,8 @@ export default function App() {
         <Route path="/business" element={<Business/>} />
         <Route path="/payment" element={<Payments/>} />
         <Route path="/ticket" element={<TicketRaise/>} />
+                <Route path="/fieldwork" element={<Fieldwork/>} />
+
       </Route>
 
         {/* Marketing Manager Login*/}

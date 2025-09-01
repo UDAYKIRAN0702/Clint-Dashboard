@@ -1,37 +1,45 @@
 .payments-container {
   flex: 1;
   padding: 20px;
-  background: #f8f9fa;
+  background: #f4f6f9;
   min-height: 100vh;
   overflow-y: auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .payments-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
-.payments-header h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #222;
+.payments-header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333;
 }
 
 .payments-search {
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 10px 14px;
+  border-radius: 8px;
   border: 1px solid #ccc;
-  width: 280px;
-  font-size: 14px;
+  width: 300px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.payments-search:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
 .table-wrapper {
   overflow-x: auto;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .payments-table {
@@ -42,30 +50,152 @@
 .payments-table th {
   background: #007bff;
   color: white;
-  padding: 12px;
+  padding: 14px;
   text-align: left;
   font-size: 14px;
+  letter-spacing: 0.5px;
 }
 
 .payments-table td {
-  padding: 10px;
+  padding: 12px;
   border-bottom: 1px solid #e5e5e5;
   font-size: 14px;
+  color: #444;
 }
 
 .payments-table tr:hover {
-  background-color: #f1f7ff;
+  background-color: #f9fbff;
+  transition: background 0.2s;
 }
 
+/* Status colors */
+.payments-table td:nth-child(8) {
+  font-weight: 600;
+}
+
+.payments-table td:nth-child(8):contains("Pending") {
+  color: #d9534f; /* red */
+}
+
+.payments-table td:nth-child(8):contains("Paid") {
+  color: #28a745; /* green */
+}
+
+/* Action buttons */
+.edit-btn, .save-btn, .cancel-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 6px;
+  transition: 0.2s;
+}
+
+.edit-btn {
+  background: #007bff;
+  color: #fff;
+}
+
+.edit-btn:hover {
+  background: #0062cc;
+}
+
+.save-btn {
+  background: #28a745;
+  color: #fff;
+}
+
+.save-btn:hover {
+  background: #218838;
+}
+
+.cancel-btn {
+  background: #dc3545;
+  color: #fff;
+}
+
+.cancel-btn:hover {
+  background: #c82333;
+}
+
+/* Utility text */
 .loading-text {
   color: #555;
+  font-size: 15px;
 }
 
 .error-text {
-  color: red;
+  color: #d9534f;
+  font-weight: 600;
 }
 
 .no-data {
   color: #888;
   font-style: italic;
+  font-size: 14px;
+  text-align: center;
+}
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Modal Content */
+.modal-content {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content label {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+}
+
+.modal-content input,
+.modal-content select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 4px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.modal-actions {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-actions button {
+  margin-left: 10px;
 }

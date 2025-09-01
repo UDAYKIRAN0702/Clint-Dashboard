@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
+import { IoGitNetworkSharp } from "react-icons/io5";
+
 import {
   FaUserCircle,
   FaUser,
@@ -96,6 +98,7 @@ export default function DashboardLayout() {
                 <FaShareSquare /> Referral
               </Link>
             </li>
+           
             <li className={isActive("/payment")}>
               <Link to="/payment">
                 <FaCcAmazonPay /> Payments
@@ -104,6 +107,13 @@ export default function DashboardLayout() {
             <li className={isActive("/business")}>
               <Link to="/business">
                 <LuBriefcaseBusiness /> Business Analysis
+              </Link>
+            </li>
+
+
+             <li className={isActive("/fieldwork")}>
+              <Link to="/fieldwork">
+                <IoGitNetworkSharp /> Field Work
               </Link>
             </li>
             <li className={isActive("/ticket")}>
