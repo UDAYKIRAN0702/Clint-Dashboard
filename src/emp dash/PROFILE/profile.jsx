@@ -4,9 +4,9 @@ import "./profile.css";
 
 // Import separate components (no spaces in filenames)
 import Info from "./info";
-import ChangePassword from "./change password";
-import BankDetails from "./Bank Details";
-import VirtualIDCard from "./Digital ID";
+import ChangePassword from "./change_password";
+import BankDetails from "./Bank_Details";
+import VirtualIDCard from "./Digital_ID";
 
 const sections = [
   { id: "info", title: "Personal Info", icon: <FaUser /> },

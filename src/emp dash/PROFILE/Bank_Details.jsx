@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Bank Details.css';
+import './Bank_Details.css';
 
 function BankDetails() {
   const [formData, setFormData] = useState({
