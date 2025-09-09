@@ -16,7 +16,7 @@ import TicketRaise from "./emp dash/Ticket Raise";
 import Dashboard from "./emp dash/Dashboard";
 import Fieldwork from "./emp dash/Fieldwork";
 import Crm from "./emp dash/Crm";
-import Forgotpassword from "./emp dash/Forgotpassword";
+
 
 
 export default function App() {
@@ -39,7 +39,7 @@ export default function App() {
         <Route path="/payment" element={<Payments/>} />
         <Route path="/ticket" element={<TicketRaise/>} />
         <Route path="/fieldwork" element={<Fieldwork/>} />
-        <Route path="/forgotpassword" element={<Forgotpassword/>} />
+        
 
       </Route>
         {/* Marketing Manager Login*/}
