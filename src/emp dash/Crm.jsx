@@ -6,13 +6,13 @@ const apiService = {
   // GET all clients
   getClients: async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/crm/'); // Update with your actual API endpoint
+      const response = await fetch("http://127.0.0.1:8000/api/crm/");
       if (!response.ok) {
-        throw new Error('Failed to fetch clients');
+        throw new Error("Failed to fetch clients");
       }
       return await response.json();
     } catch (error) {
-      console.error('Error fetching clients:', error);
+      console.error("Error fetching clients:", error);
       throw error;
     }
   },
@@ -20,23 +20,23 @@ const apiService = {
   // POST a new client
   addClient: async (clientData) => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/crm/', { // Update with your actual API endpoint
-        method: 'POST',
+      const response = await fetch("http://127.0.0.1:8000/api/crm/", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(clientData),
       });
-      
+
       if (!response.ok) {
-        throw new Error('Failed to add client');
+        throw new Error("Failed to add client");
       }
       return await response.json();
     } catch (error) {
-      console.error('Error adding client:', error);
+      console.error("Error adding client:", error);
       throw error;
     }
-  }
+  },
 };
 
 const Crm = () => {
@@ -67,7 +67,7 @@ const Crm = () => {
       setClients(data);
       setError(null);
     } catch (err) {
-      setError('Failed to fetch clients. Please try again later.');
+      setError("Failed to fetch clients. Please try again later.");
       console.error(err);
     } finally {
       setLoading(false);
@@ -93,17 +93,19 @@ const Crm = () => {
       });
       setShowForm(false);
     } catch (err) {
-      setError('Failed to add client. Please try again.');
+      setError("Failed to add client. Please try again.");
       console.error(err);
     }
   };
 
-  // const filteredClients = clients.filter(
-  //   (client) =>
-  //     client.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  //     client.client_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  //     client.software.toLowerCase().includes(searchQuery.toLowerCase())
-  // );
+  // Filtering clients
+  const filteredClients = clients.filter((client) =>
+    [client.name, client.client_name, client.software]
+      .filter(Boolean) // removes null/undefined
+      .some((field) =>
+        field.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+  );
 
   return (
     <div className="crm-container">
@@ -203,7 +205,7 @@ const Crm = () => {
       {loading && <div className="crm-loading">Loading clients...</div>}
 
       {/* Clients Table */}
-      {!loading && (
+      {!loading && filteredClients.length > 0 && (
         <table className="crm-table">
           <thead>
             <tr>
