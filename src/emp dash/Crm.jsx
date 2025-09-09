@@ -98,12 +98,12 @@ const Crm = () => {
     }
   };
 
-  const filteredClients = clients.filter(
-    (client) =>
-      client.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      client.client_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      client.software.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // const filteredClients = clients.filter(
+  //   (client) =>
+  //     client.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //     client.client_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //     client.software.toLowerCase().includes(searchQuery.toLowerCase())
+  // );
 
   return (
     <div className="crm-container">

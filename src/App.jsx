@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import StaffLogin from "./emp dash/staf";
 import DashboardLayout from "./emp dash/Dlogin";
 import TodayBusines from "./emp dash/Today Business";
-import Crm from "./emp dash/Crm";
+
 import Refferal from "./emp dash/Refferal";
 import Profile from "./emp dash/PROFILE/profile";
 import ChangePassword from "./emp dash/PROFILE/change password";
@@ -15,6 +15,7 @@ import Payments from "./emp dash/payment";
 import TicketRaise from "./emp dash/Ticket Raise";
 import Dashboard from "./emp dash/Dashboard";
 import Fieldwork from "./emp dash/Fieldwork";
+import Crm from "./emp dash/Crm";
 
 
 export default function App() {
