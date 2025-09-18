@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./Crm.css";
 
-// API service functions
+// Create an axios instance with base configuration
+const apiClient = axios.create({
+  baseURL: "http://127.0.0.1:8000/api/crm/",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// API service functions using axios
 const apiService = {
   // GET all clients
   getClients: async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/crm/");
-      if (!response.ok) {
-        throw new Error("Failed to fetch clients");
-      }
-      return await response.json();
+      const response = await apiClient.get("/");
+      return response.data;
     } catch (error) {
       console.error("Error fetching clients:", error);
       throw error;
@@ -20,18 +26,8 @@ const apiService = {
   // POST a new client
   addClient: async (clientData) => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/crm/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(clientData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to add client");
-      }
-      return await response.json();
+      const response = await apiClient.post("/", clientData);
+      return response.data;
     } catch (error) {
       console.error("Error adding client:", error);
       throw error;

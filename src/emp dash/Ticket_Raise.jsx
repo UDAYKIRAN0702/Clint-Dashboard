@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaTicketAlt, FaTimes } from 'react-icons/fa';
 import axios from 'axios';
-import './Ticket Raise.css';
+import './Ticket_Raise.css';
 
 // Base API URL - replace with your actual API endpoint
 const API_BASE_URL = 'http://127.0.0.1:8000/api';

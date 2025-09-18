@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Digital ID.css";
+import "./Digital_ID.css";
 
 export default function VirtualID() {
   const [data, setData] = useState(null);

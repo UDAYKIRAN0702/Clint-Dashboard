@@ -1,18 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 import StaffLogin from "./emp dash/stafLogin";
 import DashboardLayout from "./emp dash/Dlogin";
-import TodayBusines from "./emp dash/Today Business";
+import TodayBusines from "./emp dash/Today_Business";
 
 import Refferal from "./emp dash/Refferal";
 import Profile from "./emp dash/PROFILE/profile";
-import ChangePassword from "./emp dash/PROFILE/change password";
-import BankDetails from "./emp dash/PROFILE/Bank Details";
-import VirtualID from "./emp dash/PROFILE/Digital ID";
+import ChangePassword from "./emp dash/PROFILE/change_password";
+import BankDetails from "./emp dash/PROFILE/Bank_Details";
+import VirtualID from "./emp dash/PROFILE/Digital_ID";
 import Info from "./emp dash/PROFILE/info";
 import OrgTree from "./emp dash/CAT.JSX";
 import Business from "./emp dash/Business ";
 import Payments from "./emp dash/payment";
-import TicketRaise from "./emp dash/Ticket Raise";
+import TicketRaise from "./emp dash/Ticket_Raise";
 import Dashboard from "./emp dash/Dashboard";
 import Fieldwork from "./emp dash/Fieldwork";
 import Crm from "./emp dash/Crm";
